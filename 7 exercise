@@ -1,0 +1,45 @@
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.impute import SimpleImputer
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import classification_report
+
+df = pd.read_csv('data.csv')
+
+X = df.drop('target', axis=1) 
+y = df['target']  
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+numerical_features = X.select_dtypes(include=['int64', 'float64']).columns
+categorical_features = X.select_dtypes(include=['object']).columns
+
+numerical_pipeline = Pipeline(steps=[
+    ('imputer', SimpleImputer(strategy='mean')), 
+    ('scaler', StandardScaler())  
+])
+
+categorical_pipeline = Pipeline(steps=[
+    ('encoder', OneHotEncoder(handle_unknown='ignore'))  
+])
+
+preprocessor = ColumnTransformer(
+    transformers=[
+        ('num', numerical_pipeline, numerical_features),
+        ('cat', categorical_pipeline, categorical_features)
+    ]
+)
+
+model_pipeline = Pipeline(steps=[
+    ('preprocessor', preprocessor),
+    ('classifier', RandomForestClassifier(random_state=42))  
+])
+
+model_pipeline.fit(X_train, y_train)
+
+y_pred = model_pipeline.predict(X_test)
+print("\nОценка модели:")
+print(classification_report(y_test, y_pred))
