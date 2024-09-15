@@ -1,0 +1,11 @@
+import pandas as pd
+
+df = pd.read_csv('/Users/macbookair/Desktop/data.csv')
+
+print(df.head())
+
+print(df.tail())
+
+print(df.info())
+
+print(df.isnull().sum())
