@@ -1,0 +1,24 @@
+import pandas as pd
+from sklearn.preprocessing import PolynomialFeatures
+
+df = pd.read_csv('data.csv')
+
+
+df['interaction_feature'] = df['feature1'] * df['feature2']
+
+poly = PolynomialFeatures(degree=2, include_bias=False)
+df_poly = df.copy()
+df_poly[['feature1', 'feature2']] = poly.fit_transform(df[['feature1', 'feature2']])
+print(df_poly.head())
+
+df['date_column'] = pd.to_datetime(df['date_column'])
+df['year'] = df['date_column'].dt.year
+df['month'] = df['date_column'].dt.month
+df['day'] = df['date_column'].dt.day
+df['weekday'] = df['date_column'].dt.weekday
+
+print(df[['date_column', 'year', 'month', 'day', 'weekday']].head())
+
+df['total_revenue'] = df['quantity'] * df['price']
+
+print(df[['quantity', 'price', 'total_revenue']].head())
