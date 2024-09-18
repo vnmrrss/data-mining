@@ -1,0 +1,41 @@
+1. 
+1.Use the pd.read_csv('filename.csv') function.
+2.The info() function shows: the number of rows and columns, the data type of each column, the number of non-null (non-missing) results in each column, and the amount of memory occupied by the DataFrame.
+3.This is done with the isnull() method, which, when combined with sum(), shows the number of missing results in each column.
+
+2.
+1.Choose one or more of the strategies from the examples above. For example, you might use multiple-value imputation if you have a lot of missing results and don't want to remove the data. Or use direct imputation if your data is time-dependent.
+2. Filling missing records generates data but allows rows to be retained and data to be retained. Be aware that this has implications for analysis, for example, level filling may reduce variability in the data.
+3.Removing a row may be appropriate if the missing values ​​are a small percentage of the total data and their removal does not affect the analysis of the results. Filling may result in inclusion, especially if the missing values ​​represent systematic errors.
+
+3.
+1.Normalization (Min-Max Scaling): Reduces the data to the range [0, 1]. Useful when the data has different scales.Standardization: Reduces the data to have zero mean and a single standard deviation. Useful for data that is normally distributed.
+2.One-Hot Encoding creates binned columns for each unique value in a categorical column. This allows categorical variables to be used in machine learning algorithms that require numeric inputs.
+3.Binning can help make data more understandable and interpretable, especially if the data has a wide range. It can also help in constructing complex features that can be useful in machine learning algorithms.
+
+4.
+1.In the examples above, interacting features, polynomial features, date-based features, and a domain-knowledge-based feature are used. This is done to add more information that can improve the quality of the model and predictive ability.
+2.New features can help models better capture dependencies and interactions in the data. For example, polynomial features can capture nonlinear dependencies, date-based features can reveal seasonal and temporal trends.
+3.Date-based features can help identify seasonal, monthly, or day-of-week trends. This can be useful in time series problems, sales forecasting, customer behavior analysis, and other time-based data.
+
+5.
+1.The posts were identified using the drop_duulates() method, which removes all duplicate rows.
+2.I used two methods: Z-score and IQR. Z-score is used when the data is predicted to be normally distributed, while IQR is more versatile and does not require distributional assumptions. Both methods allow you to keep the data free of extreme results that may skew the analysis.
+3.Inconsistencies in categorical data were eliminated by formatting the text to a uniform format (lowercase and removing spaces) and merging similar categories. This helps make the data more consistent and understandable for further analysis.
+
+6. 
+1.The train_test_split() function from the sklearn.model_selection library is used to split datasets. This function splits the data about the training and test sets, shows the proportion of the test set, and other parameters.
+2.Selection size: too small a training set may not provide sufficient training for the models, while too small a test set may not provide a reliable estimate of the performance.
+Problem complexity: more data may be required to solve complex problemsdata: With a large amount of data, you can afford to have a larger test set without compromising training.
+3.A larger training set usually allows the model to better capture the dependencies in the data and improves its generalization ability.
+A smaller training set can lead to overfitting or underfitting, which worsens the generalization ability of the model.
+
+7. 
+1.Automate the process: A pipeline automates the data preprocessing process and ensures that the steps are performed consistently.
+Simplify the code: A pipeline simplifies the code by combining all the preprocessing steps and model training into a single object.
+Repeatability: A pipeline ensures that transformations are applied equally to the training and test data, preventing data leakage and errors.
+2.The pipeline ensures that all transformations (e.g. imputation, scaling, encoding) are performed consistently and identically on both the training and test datasets. This is achieved by applying the same transformations in training and testing, which prevents inconsistencies and data leakage.
+3.Additional steps can be added to the pipeline, such as:
+Feature generation: Adding steps to generate new features or feature selection.
+Polynomial features: Using PolynomialFeatures to generate polynomial features.
+Temporal data processing: Integrating temporal data processing using FeatureUnion to combine different pipelines..
