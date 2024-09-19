@@ -41,5 +41,4 @@ model_pipeline = Pipeline(steps=[
 model_pipeline.fit(X_train, y_train)
 
 y_pred = model_pipeline.predict(X_test)
-print("\nОценка модели:")
 print(classification_report(y_test, y_pred))
