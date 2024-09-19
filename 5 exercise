@@ -6,7 +6,6 @@ df = pd.read_csv('data.csv')
 
 
 df_cleaned = df.drop_duplicates()
-print("Примеры данных после удаления дубликатов:")
 print(df_cleaned.head())
 
 
